@@ -1,5 +1,5 @@
 from src.item import Item
-
+import unittest
 def test_get_total_cost():
     item = Item("Телефон", 10000, 5)
     assert item.get_total_cost() == 50000
@@ -33,3 +33,17 @@ def test_string_to_number():
     assert Item.string_to_number("30") == 30.0
     assert Item.string_to_number("-5.5") == -5.5
     assert Item.string_to_number("0") == 0.0
+
+class ItemTests(unittest.TestCase):
+    def setUp(self):
+        self.item = Item("Test Item", 10.0, 5)
+
+    def test_repr(self):
+        expected = "Item('Test Item', 10.0, 5)"
+        actual = repr(self.item)
+        self.assertEqual(actual, expected)
+
+    def test_str(self):
+        expected = "Name: Test Item, Price: 10.0, Quantity: 5"
+        actual = str(self.item)
+        self.assertEqual(actual, expected)
