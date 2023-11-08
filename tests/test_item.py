@@ -75,4 +75,3 @@ class PhoneTests(unittest.TestCase):
     def test_add_phone_with_other_class_instance(self):
         with self.assertRaises(TypeError):
             result = self.phone1 + "test"
-
