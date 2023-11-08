@@ -75,3 +75,34 @@ class Phone(Item):
 
     def __str__(self):
         return f"Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}, Number of SIM: {self.number_of_sim}"
+
+
+
+#Доп класс
+class LanguageMixin:
+    def __init__(self):
+        self.__language = "EN"
+
+    @property
+    def language(self):
+        return self.__language
+
+    def change_lang(self, lang):
+        if lang == "EN" or lang == "RU":
+            self.__language = lang
+        else:
+            raise ValueError("Invalid language. Only EN and RU are supported.")
+
+
+
+class Keyboard(Item, LanguageMixin):
+    def __init__(self, name, price, quantity):
+        super().__init__(name, price, quantity)
+
+    def __repr__(self):
+        return f"Keyboard('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}, Language: {self.language}"
+
+

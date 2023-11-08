@@ -75,3 +75,34 @@ class PhoneTests(unittest.TestCase):
     def test_add_phone_with_other_class_instance(self):
         with self.assertRaises(TypeError):
             result = self.phone1 + "test"
+
+
+class KeyboardTests(unittest.TestCase):
+    def setUp(self):
+        self.keyboard = Keyboard("Keyboard", 50, 10)
+
+    def test_name(self):
+        self.assertEqual(self.keyboard.name, "Keyboard")
+
+    def test_price(self):
+        self.assertEqual(self.keyboard.price, 50)
+
+    def test_quantity(self):
+        self.assertEqual(self.keyboard.quantity, 10)
+
+    def test_language_default(self):
+        self.assertEqual(self.keyboard.language, "EN")
+
+    def test_change_lang_valid(self):
+        self.keyboard.change_lang("RU")
+        self.assertEqual(self.keyboard.language, "RU")
+
+    def test_change_lang_invalid(self):
+        with self.assertRaises(ValueError):
+            self.keyboard.change_lang("FR")
+
+    def test_repr(self):
+        self.assertEqual(repr(self.keyboard), "Keyboard('Keyboard', 50, 10)")
+
+    def test_str(self):
+        self.assertEqual(str(self.keyboard), "Name: Keyboard, Price: 50, Quantity: 10, Language: EN")
