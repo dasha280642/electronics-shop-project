@@ -1,3 +1,6 @@
+class InstantiateCSVError(Exception):
+    pass
+
 class Item:
     discount_level = 0.85
     instances = []
@@ -27,10 +30,15 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('src/items.csv', 'r') as file:
-            for line in file:
-                name, price, quantity = line.strip().split(',')
-                cls(name, float(price), int(quantity))
+        try:
+            with open('../homework-6/items.csv', 'r') as file:
+                for line in file:
+                    name, price, quantity = line.strip().split(',')
+                    cls(name, float(price), int(quantity))
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except ValueError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(string):
